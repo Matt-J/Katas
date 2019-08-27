@@ -1,37 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 
 namespace AnagramLogic.Tests
 {
     [TestFixture]
     public class AnagramFinderTests
     {
-        private IAnagramFinder anagramFinder = new AnagramFinder();
-        string[] list = new[] { "god", "dog" };
-        
-        [NUnit.Framework.Test]
+        private IAnagramFinder anagramFinder;
+        string[] list = { "god", "dog" };
+
+        [SetUp]
+        public void SetupTests()
+        {
+            anagramFinder = new AnagramFinder();
+        }
+
+        [TearDown]
+        public void TearDownTest()
+        {
+            
+        }
+
+        [Test]
         public void GetAnagramsInListForSpecificWordShouldFindNoAnagrams()
         {
-            //var list = new[] {"god", "dog"};
             var word = "beans";
             var matches = anagramFinder.GetAnagramsInListForSpecificWord(list, word);
             matches.Count().Should().Be(0);
-
         }
-        [NUnit.Framework.Test]
+
+        [Test]
         public void GetAnagramsInListForSpecificWordShouldFindOneAnagrams()
         {
             var word = "dog";
             var match = anagramFinder.GetAnagramsInListForSpecificWord(list, word);
             match.Count().Should().Be(1);
         }
-        [NUnit.Framework.Test]
+
+        [Test]
         public void GetAnagramsInListForDifferentSpecificWordShouldFindTwoAnagrams()
         {
             var wordList = list.ToList();
@@ -39,26 +49,107 @@ namespace AnagramLogic.Tests
             wordList.Add("odg");
             var word = "god";
             var match = anagramFinder.GetAnagramsInListForSpecificWord(wordList, word);
-            match.Should().BeEquivalentTo(new[] { "dog", "odg" });
-            
+            match.Should().BeEquivalentTo("dog", "odg");
         }
 
-        [NUnit.Framework.Test]
+        [Test]
         public void GetAnagramsInListForDifferentSpecificWordShouldFindOneAnagrams()
         {
             var word = "god";
             var match = anagramFinder.GetAnagramsInListForSpecificWord(list, word);
-            match.Should().BeEquivalentTo(new[] { "dog" });
+            match.Should().BeEquivalentTo("dog");
         }
 
-        [NUnit.Framework.Test]
-        public void GetAnagramsInListForDifferentSpecificWordShouldFindOneAnagramsblah()
+        [Test]
+        public void GetAnagramsInListIsApostropheInsensitive()
         {
-            var word = "god";
-            var match = anagramFinder.GetAnagramsInListForSpecificWord(list, word);
-            match.Should().BeEquivalentTo(new[] { "dog" });
+            var word = "dogs";
+            string[] wordList = new[] {"god's", "gods", "dog"};
+            var match = anagramFinder.GetAnagramsInListForSpecificWord(wordList, word);
+            match.Should().BeEquivalentTo("gods", "god's");
+        }
+
+        [Test]
+        public void GetAnagramsInListIsApostropheInsensitiveForTargetWithApostrophe()
+        {
+            var word = "dogs''";
+            string[] wordList = new[] { "god's", "gods", "dog" };
+            var match = anagramFinder.GetAnagramsInListForSpecificWord(wordList, word);
+            match.Should().BeEquivalentTo("gods", "god's");
+        }
+
+        [Test]
+        public void GetAnagramsInListWorksForWordsWithRepeatedLetters()
+        {
+            var word = "cool";
+            string[] wordList = new[] { "col", "cool", "coool", "looc" };
+            var match = anagramFinder.GetAnagramsInListForSpecificWord(wordList, word);
+            match.Should().BeEquivalentTo("looc");
         }
 
 
+        [Test]
+        public void GetAnagramsInListCaseInsensitiveLetters()
+        {
+            var word = "COOL";
+            string[] wordList = new[] { "col", "cool", "coool", "looc" };
+            var match = anagramFinder.GetAnagramsInListForSpecificWord(wordList, word);
+            match.Should().BeEquivalentTo("looc");
+        }
+
+        [Test]
+        public void GetAllFilesShouldReturnBigList()
+        {
+            var wordList = FileHelper.GetAllWordsFromFile("WordList").ToList();
+
+            var targetWord = "kinship";
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+            var match = anagramFinder.GetAnagramsInListForSpecificWord(wordList, targetWord);
+            stopwatch.Stop();
+
+            var elapsedTimeMessage = $"Elapsed Time: {stopwatch.ElapsedMilliseconds}ms";
+            Assert.IsTrue(stopwatch.ElapsedMilliseconds <= 1500, elapsedTimeMessage);
+            Console.Write(elapsedTimeMessage);
+            
+        }
+
+
+        [Test]
+        public void GetAllAnagramsInSmallList()
+        {
+            var wordList = new List<string> {"god", "dog", "cool", "loco", "fish", "beef"};
+            
+            var match = anagramFinder.GetAllAnagramsInList(wordList);
+
+            // Get lists in same order.
+            foreach (var list in match)
+                list.Sort();
+            match.Sort((a, b) => a[0].CompareTo(b[0]));
+
+            var expectedResult = new List<List<string>>
+            {
+                new List<string>
+                {
+                    "cool",
+                    "loco"
+                },
+                new List<string>
+                {
+                    "dog",
+                    "god",
+                },
+            };
+
+            match.Should().BeEquivalentTo(expectedResult);
+        }
+
+        [Test]
+        public void CanGetTotalAnagramsInFile()
+        {
+            var wordList = FileHelper.GetAllWordsFromFile("WordList").ToList();
+            var match = anagramFinder.GetAllAnagramsInList(wordList);
+            match.Count.Should().Be(20683);
+        }
     }
 }

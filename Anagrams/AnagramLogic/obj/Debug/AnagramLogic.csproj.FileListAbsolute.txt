@@ -6,3 +6,11 @@ D:\NonProd\DevTeam\AnagramsKata\AnagramLogic\obj\Debug\AnagramLogic.csprojAssemb
 D:\NonProd\DevTeam\AnagramsKata\AnagramLogic\obj\Debug\AnagramLogic.csproj.CoreCompileInputs.cache
 D:\NonProd\DevTeam\AnagramsKata\AnagramLogic\obj\Debug\AnagramLogic.dll
 D:\NonProd\DevTeam\AnagramsKata\AnagramLogic\obj\Debug\AnagramLogic.pdb
+D:\NonProd\Katas\Anagrams\AnagramLogic\bin\Debug\ShortWordList.txt
+D:\NonProd\Katas\Anagrams\AnagramLogic\bin\Debug\WordList.txt
+D:\NonProd\Katas\Anagrams\AnagramLogic\bin\Debug\AnagramLogic.dll
+D:\NonProd\Katas\Anagrams\AnagramLogic\bin\Debug\AnagramLogic.pdb
+D:\NonProd\Katas\Anagrams\AnagramLogic\obj\Debug\AnagramLogic.csproj.CoreCompileInputs.cache
+D:\NonProd\Katas\Anagrams\AnagramLogic\obj\Debug\AnagramLogic.dll
+D:\NonProd\Katas\Anagrams\AnagramLogic\obj\Debug\AnagramLogic.pdb
+D:\NonProd\Katas\Anagrams\AnagramLogic\obj\Debug\AnagramLogic.csprojAssemblyReference.cache

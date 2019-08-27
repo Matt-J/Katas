@@ -20,7 +20,6 @@ namespace AnagramLogic.Tests
         //public void GetAllFilesShouldReturnBigList()
         //{
         //    var wordList = FileHelper.GetAllWordsFromFile("WordList");
-
         //    wordList.ToList().Count.Should().Be(338882);
         //}
     }

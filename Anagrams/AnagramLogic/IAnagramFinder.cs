@@ -7,6 +7,7 @@ namespace AnagramLogic
     /// </summary>
     public interface IAnagramFinder
     {
-        IEnumerable<string> GetAnagramsInListForSpecificWord(IEnumerable<string> baseWordList, string targetWord);
+        List<string> GetAnagramsInListForSpecificWord(IEnumerable<string> baseWordList, string targetWord);
+        List<List<string>> GetAllAnagramsInList(IEnumerable<string> baseWordList);
     }
 }
