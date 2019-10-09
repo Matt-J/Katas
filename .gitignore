@@ -18,6 +18,9 @@
 /Anagrams/AnagramLogic.Tests/obj/Debug/AnagramLogic.Tests.dll
 /Anagrams/AnagramLogic.Tests/obj/Debug/AnagramLogic.Tests.pdb
 /Anagrams/AnagramLogic.Tests/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+/*/*/obj/
+/*/*/bin/
+/*/.vs/
 *.dll
 *.cache
 *.pdb
