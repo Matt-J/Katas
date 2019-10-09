@@ -24,3 +24,5 @@
 *.dll
 *.cache
 *.pdb
+/FizzBuzzSolution/FizzBuzzSolution.v3.ncrunchsolution
+/FizzBuzzSolution/FizzBuzzSolution.v3.ncrunchsolution.user
