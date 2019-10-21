@@ -2,6 +2,6 @@
 {
     public interface IFizzBuzzer
     {
-        
+        string GetValueByNumber(int v);
     }
 }

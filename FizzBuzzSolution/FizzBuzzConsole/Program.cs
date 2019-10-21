@@ -7,9 +7,8 @@ namespace FizzBuzzConsole
     {
         static void Main(string[] args)
         {
-            IFizzBuzzer fizzBuzzer = new FizzBuzzer();
+            //FizzBuzzer fizzBuzzer = new FizzBuzzer();
 
-            
             Console.WriteLine($"");
             Console.ReadLine();
         }
