@@ -26,3 +26,5 @@
 *.pdb
 /FizzBuzzSolution/FizzBuzzSolution.v3.ncrunchsolution
 /FizzBuzzSolution/FizzBuzzSolution.v3.ncrunchsolution.user
+/StackSolution/StackSolution.v3.ncrunchsolution.user
+*ncrunch*
